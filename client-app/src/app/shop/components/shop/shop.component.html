@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="product" *ngFor="let cars of (products$ | async)">
+        <span (click)="getCar(cars._id.$oid)">{{cars.title}}</span>
+    </div>
+</div>
+
+
+
+
