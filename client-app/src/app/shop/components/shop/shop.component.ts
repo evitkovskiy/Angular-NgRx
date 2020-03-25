@@ -7,6 +7,7 @@ import {Store, select} from '@ngrx/store';
 import {IAppState} from './../../../store/state/app.state';
 import { selectedProductList } from './../../../store/selectors/product.selector';
 import { GetProducts } from './../../../store/actions/products.action'
+import { selectedUser } from 'src/app/store/selectors/user.selector';
 
 @Component({
   selector: 'app-shop',
@@ -15,7 +16,8 @@ import { GetProducts } from './../../../store/actions/products.action'
 })
 export class ShopComponent implements OnInit {
 
-  public products$ = this._store.pipe(select(selectedProductList))
+  public products$ = this._store.pipe(select(selectedProductList));
+  public user$ = this._store.pipe(select(selectedUser));
 
   public shopProducts: any;
 
@@ -32,6 +34,8 @@ export class ShopComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.shopProducts = data;
     })
+
+    this.user$.subscribe(user => console.log(user));
 
     // this.authService.getShops().subscribe(data => {
     //   this.shopProducts = data;

@@ -13,15 +13,19 @@ import { GetProduct } from './../../../store/actions/products.action'
 })
 export class ShopProductComponent implements OnInit {
 
-  public car$ = this._store.pipe(select(selectSelectedProduct))
+  public shoes$ = this._store.pipe(select(selectSelectedProduct))
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private _store: Store<IAppState>) { }
 
   ngOnInit(): void {
-    this._store.dispatch(new GetProduct(this.route.snapshot.url[0].path));
-    console.log(this.car$)
+    const shoesId = this.route.snapshot.params.id;
+    this._store.dispatch(new GetProduct(shoesId));
+  }
+
+  public btnBack() {
+    this.router.navigate(['/shop'])
   }
 
 }

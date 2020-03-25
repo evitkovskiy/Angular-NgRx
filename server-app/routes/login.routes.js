@@ -10,13 +10,19 @@ const testUser = {
 const token = config.token;
 
 router.post('/',  (req, res) => {
+
+    const activeUser = {
+        id: "1",
+        email: "jeny.vitkovskiy@gmail.com",
+        name: "Yauhen Vitkouski"
+    }
     const newUser = {
         email: req.body.email,
         password: req.body.password
     }
     if (JSON.stringify(testUser) === JSON.stringify(newUser)) {
         res.set(`authorization`, token);
-        res.send({message: `Ок`, token});
+        res.send({message: `Ок`, token, dataUser: activeUser});
     } else {
         res.status(401).json({message: `Что-то пошло не так`});
     } 

@@ -10,6 +10,7 @@ import { appReducers } from './reducers/app.reducers';
 import { environment } from '../../environments/environment';
 import { AppRoutingModule } from '../app-routing.module';
 import { ProductEffects } from './effects/product.effects';
+import { UserEffects } from './effects/user.effects';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { ProductEffects } from './effects/product.effects';
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([ProductEffects]),
+    EffectsModule.forRoot([ProductEffects, UserEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     AppRoutingModule

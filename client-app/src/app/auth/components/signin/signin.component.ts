@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { IAppState } from '../../../store/state/app.state';
+import { selectedUser } from '../../../store/selectors/user.selector';
+import { GetUser } from 'src/app/store/actions/user.action';
 
 @Component({
   selector: 'app-signin',
@@ -11,8 +15,12 @@ import { Router } from '@angular/router';
 export class SigninComponent implements OnInit {
 
   public form: FormGroup;
-  constructor (private authService: AuthService,
-    private router: Router) {
+  public user$ = this._store.pipe(select(selectedUser))
+  constructor (
+    private authService: AuthService,
+    private router: Router,
+    private _store: Store<IAppState>
+  ) {
     this.initForm();
    }
 
@@ -31,6 +39,7 @@ export class SigninComponent implements OnInit {
     const password: string = this.form.value.password;
     
     this.authService.setData(email, password).subscribe(data => {
+        this._store.dispatch(new GetUser(data.dataUser));
       
         localStorage.setItem('token', data.token)
         this.router.navigate(['']);
