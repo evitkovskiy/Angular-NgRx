@@ -3,10 +3,57 @@
 
     img {
         width: 200px;
+        margin: 0 10px;
     }
 }
 
 .shoes-card {
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.shoes-title {
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.shoes-params {
+    display: flex;
+    margin: 10px 0;
+}
+
+.shoes-params-title {
+    font-weight: 600;
+}
+
+.shoes-size {
+    margin-right: 20px;
+}
+
+.shoes-description {
+    width: 85%;
+}
+
+.shoes-description-text {
+    word-break: break-all;
+}
+
+.btn-back {
+    width: 110px;
+    height: 30px;
+    background: #777777;
+    border: 1px solid #777777;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-back:hover {
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }

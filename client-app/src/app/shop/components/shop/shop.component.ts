@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {map} from 'rxjs/operators'
 
 import {Store, select} from '@ngrx/store';
 import {IAppState} from './../../../store/state/app.state';
 import { selectedProductList } from './../../../store/selectors/product.selector';
-import { GetProducts } from './../../../store/actions/products.action'
-import { selectedUser } from 'src/app/store/selectors/user.selector';
+import { GetProducts, GetProduct } from './../../../store/actions/products.action'
+import { GetUser } from 'src/app/store/actions/user.action';
+
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-shop',
@@ -16,36 +18,38 @@ import { selectedUser } from 'src/app/store/selectors/user.selector';
 })
 export class ShopComponent implements OnInit {
 
+  public form: FormGroup;
   public products$ = this._store.pipe(select(selectedProductList));
-  public user$ = this._store.pipe(select(selectedUser));
-
-  public shopProducts: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authService : AuthService,
-    private _store: Store<IAppState>
-  ) { }
+    private _store: Store<IAppState>,
+    private authService: AuthService
+  ) { 
+    this.initForm();
+   }
 
-  ngOnInit(): void {
-    this._store.dispatch(new GetProducts());
-    this.products$.subscribe(data => console.log(data))
-    this.route.data.subscribe(data => {
-      this.shopProducts = data;
+  public initForm() {
+    this.form = new FormGroup({
+      search: new FormControl(null, Validators.required)
     })
-
-    this.user$.subscribe(user => console.log(user));
-
-    // this.authService.getShops().subscribe(data => {
-    //   this.shopProducts = data;
-    //   console.log(this.shopProducts)
-    // })
-    
+  }
+ 
+  ngOnInit(): void {
+    this._store.dispatch(new GetProducts(''));
+    this.route.data
+      .subscribe(data => this._store.dispatch(new GetUser(data.userData)));
+    this.getSearch();
   }
 
-  public getCar(carId) {
-    this.router.navigate([`shop/${carId}`])
+  public getShoes(shoesId) {
+    this.router.navigate([`shop/product`, shoesId]);
   }
 
+  private getSearch() {
+    this.form.get('search').valueChanges
+      .pipe(debounceTime(500))
+      .subscribe(data => this._store.dispatch(new GetProducts(data)))
+  }
 }

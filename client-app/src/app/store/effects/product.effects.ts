@@ -10,7 +10,7 @@ import {
 } from '../actions/products.action'
 import { AuthService } from '../../core/services/auth.service';
 import { IProduct } from '../state/products.state';
-import {selectedProductList, selectSelectedProduct} from '../selectors/product.selector'
+import { selectedProductList } from '../selectors/product.selector'
 
 @Injectable()
 export class ProductEffects {
@@ -18,17 +18,18 @@ export class ProductEffects {
     getProduct$ = this.action$.pipe(
         ofType<GetProduct>(EProductActions.GetProduct),
         map(action => action.payload),
-        withLatestFrom(this.store.pipe(select(selectedProductList))),
-        switchMap(([id, products]) => {
+        withLatestFrom(this.authService.getShops()),
+        map(([id, products]) => {
             const selectedProduct = products.filter(user => user._id.$oid === id)[0];
-            return of(new GetProductSuccess(selectedProduct))
+            return new GetProductSuccess(selectedProduct)
         })
     );
 
     @Effect()
     getProducts = this.action$.pipe(
         ofType<GetProducts>(EProductActions.GetProducts),
-        switchMap(() => this.authService.getShops()),
+        switchMap((data) => !data.payload ? this.authService.getShops()
+            : this.authService.filterData(data.payload)),
         switchMap((productHttp: IProduct[]) => 
         of(new GetProductsSuccess(productHttp)))
     )

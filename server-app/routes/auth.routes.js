@@ -4,7 +4,8 @@ const config = require(`config`);
 
 const userData = {
     id: "123",
-    email: "vitkovskiy@gmail.com"
+    email: "vitkovskiy@gmail.com",
+    name: "Yauhen Vitkouski"
 }
 
 router.get('/',  (req, res) => {

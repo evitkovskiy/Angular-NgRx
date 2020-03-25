@@ -40,7 +40,6 @@ export class SigninComponent implements OnInit {
     
     this.authService.setData(email, password).subscribe(data => {
         this._store.dispatch(new GetUser(data.dataUser));
-      
         localStorage.setItem('token', data.token)
         this.router.navigate(['']);
       })

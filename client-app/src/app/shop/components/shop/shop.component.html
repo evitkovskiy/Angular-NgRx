@@ -1,8 +1,14 @@
-
-<div class="user-name">{{(user$ | async)?.name}}</div>
 <div class="container"> 
-    <div class="product" *ngFor="let cars of (products$ | async)">
-        <span (click)="getCar(cars._id.$oid)">{{cars.title}}</span>
+    <form [formGroup]="form">
+        <input formControlName="search" class="search" type="text" placeholder="Name product">
+    </form>
+    <div class="product">
+        <ng-container *ngFor="let cars of (products$ | async)">
+            <div class="product-item" (click)="getShoes(cars._id.$oid)">
+            <div>{{cars.title}}</div>
+            <img src="{{cars.images[0]}}" alt="shoes">
+            </div>
+        </ng-container>
     </div>
 </div>
 

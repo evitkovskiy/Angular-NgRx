@@ -4,6 +4,7 @@ import { ShopRoutingModule } from './shop-routing.module'
 import { CoreModule } from '../core/core.module';
 import { ShopComponent } from './components/shop/shop.component';
 import { ShopProductComponent } from './components/shop-product/shop-product.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +13,9 @@ import { ShopProductComponent } from './components/shop-product/shop-product.com
   imports: [
     CommonModule,
     ShopRoutingModule,
-    CoreModule
+    CoreModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ShopModule { }

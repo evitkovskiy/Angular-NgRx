@@ -8,12 +8,11 @@ import { CoreModule } from './core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MyStoreModule } from './store/store.module';
-import { HeaderComponent } from './header/header.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent
+    AppComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +22,8 @@ import { HeaderComponent } from './header/header.component';
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
-    MyStoreModule
+    MyStoreModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

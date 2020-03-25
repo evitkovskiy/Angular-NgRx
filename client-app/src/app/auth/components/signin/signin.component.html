@@ -1,5 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
-    <input type="text" formControlName="email" placeholder="email">
-    <input type="text" formControlName="password" placeholder="password">
-    <button type="submit">Отправить</button>
+<form class="form" [formGroup]="form" (ngSubmit)="submit()">
+    <h3 class="form-title">Log In</h3>
+    <input type="text" class="form-input" formControlName="email" placeholder="email">
+    <input type="text" class="form-input" formControlName="password" placeholder="password">
+    <button type="submit" class="btn-login">Отправить</button>
 </form>

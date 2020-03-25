@@ -3,8 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import {Store, select} from '@ngrx/store';
 import {IAppState} from './../../../store/state/app.state';
-import { selectedProductList, selectSelectedProduct } from './../../../store/selectors/product.selector';
-import { GetProduct } from './../../../store/actions/products.action'
+import { selectSelectedProduct } from './../../../store/selectors/product.selector';
+import { GetProduct, GetProducts } from './../../../store/actions/products.action'
+import { GetUser } from 'src/app/store/actions/user.action';
 
 @Component({
   selector: 'app-shop-product',
@@ -20,6 +21,9 @@ export class ShopProductComponent implements OnInit {
     private _store: Store<IAppState>) { }
 
   ngOnInit(): void {
+    this.route.data.subscribe(data => {
+      this._store.dispatch(new GetUser(data.userData))
+    })
     const shoesId = this.route.snapshot.params.id;
     this._store.dispatch(new GetProduct(shoesId));
   }

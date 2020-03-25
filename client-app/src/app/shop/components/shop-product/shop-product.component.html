@@ -1,30 +1,32 @@
 <div class="container">
     <div class="shoes-card">
-        <span>Name: {{(shoes$ | async).title}}</span>
+        <span class="shoes-title">
+            {{(shoes$ | async)?.title}} ({{(shoes$ | async)?.price}} $)
+        </span>
         <div class="shoes-images">
-            <ng-container *ngFor="let img of (shoes$ | async).images">
+            <ng-container *ngFor="let img of (shoes$ | async)?.images">
             <img src="{{img}}" alt="shoes">
             </ng-container>
         </div>
-        <div class="shoes-size">
-            Sizes: 
-            <ng-container *ngFor="let size of (shoes$ | async).size">
-            <span class="size">{{size}}   </span>
-            </ng-container>
-        </div>
-        <div class="shoes-color">
-            Colors: 
-            <ng-container *ngFor="let color of (shoes$ | async).color">
-            <span class="size">{{color}}   </span>
-            </ng-container>
+        <div class="shoes-params">
+            <div class="shoes-size">
+                <span class="shoes-params-title">Sizes: </span>
+                <ng-container *ngFor="let size of (shoes$ | async)?.size">
+                <span class="size">{{size}}   </span>
+                </ng-container>
+            </div>
+            <div class="shoes-color">
+                <span class="shoes-params-title">Colors: </span>
+                <ng-container *ngFor="let color of (shoes$ | async)?.color">
+                <span class="size">{{color}}   </span>
+                </ng-container>
+            </div>
         </div>
         <div class="shoes-description">
-            <span>Description: {{(shoes$ | async).description}}</span>
-        </div>
-        <div class="shoes-price">
-            <span>Price: {{(shoes$ | async).price}}</span>
+            <span class="shoes-params-title">Description: </span>
+            <span class="shoes-description-text">{{(shoes$ | async)?.description}}</span>
         </div>
     </div>
 
-    <button class="btn-back" (click)="btnBack()"><--Back</button>
+    <button class="btn-back" (click)="btnBack()">Back</button>
 </div>
