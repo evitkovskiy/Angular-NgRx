@@ -14,7 +14,7 @@ import { GetUser } from 'src/app/store/actions/user.action';
 })
 export class ShopProductComponent implements OnInit {
 
-  public shoes$ = this._store.pipe(select(selectSelectedProduct))
+  public clothes$ = this._store.pipe(select(selectSelectedProduct))
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -24,8 +24,8 @@ export class ShopProductComponent implements OnInit {
     this.route.data.subscribe(data => {
       this._store.dispatch(new GetUser(data.userData))
     })
-    const shoesId = this.route.snapshot.params.id;
-    this._store.dispatch(new GetProduct(shoesId));
+    const clothesId = this.route.snapshot.params.id;
+    this._store.dispatch(new GetProduct(clothesId));
   }
 
   public btnBack() {

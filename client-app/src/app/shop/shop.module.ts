@@ -5,6 +5,7 @@ import { CoreModule } from '../core/core.module';
 import { ShopComponent } from './components/shop/shop.component';
 import { ShopProductComponent } from './components/shop-product/shop-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ShopRoutingModule,
     CoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class ShopModule { }

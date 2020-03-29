@@ -3,15 +3,15 @@
         <input formControlName="search" class="search" type="text" placeholder="Name product">
     </form>
     <div class="product">
-        <ng-container *ngFor="let cars of (products$ | async)">
-            <div class="product-item" (click)="getShoes(cars._id.$oid)">
-            <div>{{cars.title}}</div>
-            <img src="{{cars.images[0]}}" alt="shoes">
+        <ng-container *ngFor="let clothes of (products$ | async)?.data">
+            <div class="product-item" (click)="getClothes(clothes._id.$oid)">
+            <div>{{clothes.title}}</div>
+            <img src="{{clothes.images[0]}}" alt="clothes">
             </div>
         </ng-container>
     </div>
+    <app-pagination [searchString]="searchString"></app-pagination>
 </div>
-
 
 
 

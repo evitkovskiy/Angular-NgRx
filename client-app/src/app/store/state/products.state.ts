@@ -15,7 +15,7 @@ export interface IProduct {
 }
 
 export interface IProductState {
-    products: IProduct[],
+    products: {data: IProduct[], limit: number},
     selectedProduct: IProduct
 }
 

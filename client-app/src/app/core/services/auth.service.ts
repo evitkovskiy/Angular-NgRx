@@ -10,7 +10,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-    public setData(email: string, password: string): Observable<any> {
+    public login(email: string, password: string): Observable<any> {
       return this.http.post<any>(`login`, {
         email,
         password
@@ -22,26 +22,7 @@ export class AuthService {
         ));
     }
 
-    public isAuth(): Promise<boolean> {
-      return new Promise(resolve => {
-        resolve(!!localStorage.getItem('token'))
-      });
+    public isAuth(): boolean {
+      return !!localStorage.getItem('token')
     }
-
-    public getUserData() {
-      return this.http.get(`userdata`);
-    }
-
-    public getShops(): Observable<any> {
-      return this.http.get<any>('static/db.json');
-    }
-
-    public filterData(searchString: string) {
-      return this.http.get('filter', {
-        params: {
-          searchString
-        }
-      })
-    }
-
   }

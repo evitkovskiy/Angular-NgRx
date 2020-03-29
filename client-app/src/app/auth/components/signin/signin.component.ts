@@ -38,7 +38,7 @@ export class SigninComponent implements OnInit {
     const email: string = this.form.value.email;
     const password: string = this.form.value.password;
     
-    this.authService.setData(email, password).subscribe(data => {
+    this.authService.login(email, password).subscribe(data => {
         this._store.dispatch(new GetUser(data.dataUser));
         localStorage.setItem('token', data.token)
         this.router.navigate(['']);

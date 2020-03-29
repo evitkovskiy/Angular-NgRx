@@ -13,14 +13,11 @@ export class RedirectGuard implements CanActivate {
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authService.isAuth().then( isAuth => {
-      if(isAuth) {
-        return true
-      } else {
-        this.router.navigate(['auth'])
-      }
-    });
+    state: RouterStateSnapshot): boolean {
+    if(this.authService.isAuth) {
+      return true
+    } else {
+      this.router.navigate(['auth'])
+    } 
   }
-  
 }

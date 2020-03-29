@@ -11,12 +11,13 @@ export enum EProductActions {
 
 export class GetProducts implements Action {
     public readonly type = EProductActions.GetProducts;
-    constructor(public payload: string) {}
+    constructor(public payload: string,
+                public params: any) {}
 }
 
 export class GetProductsSuccess implements Action {
     public readonly type = EProductActions.GetProductsSuccess;
-    constructor(public payload: IProduct[]) {}
+    constructor(public payload: IProduct[], public limit: number) {}
 }
 
 export class GetProduct implements Action {

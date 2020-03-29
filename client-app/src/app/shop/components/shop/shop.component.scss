@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 5px;
     padding: 10px 0;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     background: #fff;
@@ -27,7 +27,7 @@
 }
 
 .product-item img {
-    width: 150px;
+    width: 125px;
 }
 
 .product-item div {
@@ -42,4 +42,8 @@
     height: 17px;
     padding: 5px;
     border-radius: 5px;
+}
+
+app-pagination {
+    width: 100%;
 }

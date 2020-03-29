@@ -1,30 +1,30 @@
 <div class="container">
-    <div class="shoes-card">
-        <span class="shoes-title">
-            {{(shoes$ | async)?.title}} ({{(shoes$ | async)?.price}} $)
+    <div class="clothes-card">
+        <span class="clothes-title">
+            {{(clothes$ | async)?.title}} ({{(clothes$ | async)?.price}} $)
         </span>
-        <div class="shoes-images">
-            <ng-container *ngFor="let img of (shoes$ | async)?.images">
-            <img src="{{img}}" alt="shoes">
+        <div class="clothes-images">
+            <ng-container *ngFor="let img of (clothes$ | async)?.images">
+            <img src="{{img}}" alt="clothes">
             </ng-container>
         </div>
-        <div class="shoes-params">
-            <div class="shoes-size">
-                <span class="shoes-params-title">Sizes: </span>
-                <ng-container *ngFor="let size of (shoes$ | async)?.size">
+        <div class="clothes-params">
+            <div class="clothes-size">
+                <span class="clothes-params-title">Sizes: </span>
+                <ng-container *ngFor="let size of (clothes$ | async)?.size">
                 <span class="size">{{size}}   </span>
                 </ng-container>
             </div>
-            <div class="shoes-color">
-                <span class="shoes-params-title">Colors: </span>
-                <ng-container *ngFor="let color of (shoes$ | async)?.color">
+            <div class="clothes-color">
+                <span class="clothes-params-title">Colors: </span>
+                <ng-container *ngFor="let color of (clothes$ | async)?.color">
                 <span class="size">{{color}}   </span>
                 </ng-container>
             </div>
         </div>
-        <div class="shoes-description">
-            <span class="shoes-params-title">Description: </span>
-            <span class="shoes-description-text">{{(shoes$ | async)?.description}}</span>
+        <div class="clothes-description">
+            <span class="clothes-params-title">Description: </span>
+            <span class="clothes-description-text">{{(clothes$ | async)?.description}}</span>
         </div>
     </div>
 

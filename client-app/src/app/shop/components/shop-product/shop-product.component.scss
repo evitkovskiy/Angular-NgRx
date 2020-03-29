@@ -1,4 +1,4 @@
-.shoes-images {
+.clothes-images {
     display: flex;
 
     img {
@@ -7,7 +7,7 @@
     }
 }
 
-.shoes-card {
+.clothes-card {
     max-width: 1000px;
     margin: 10px auto;
     display: flex;
@@ -16,30 +16,30 @@
     align-items: center;
 }
 
-.shoes-title {
+.clothes-title {
     font-size: 18px;
     font-weight: 600;
     padding-bottom: 10px;
 }
 
-.shoes-params {
+.clothes-params {
     display: flex;
     margin: 10px 0;
 }
 
-.shoes-params-title {
+.clothes-params-title {
     font-weight: 600;
 }
 
-.shoes-size {
+.clothes-size {
     margin-right: 20px;
 }
 
-.shoes-description {
+.clothes-description {
     width: 85%;
 }
 
-.shoes-description-text {
+.clothes-description-text {
     word-break: break-all;
 }
 

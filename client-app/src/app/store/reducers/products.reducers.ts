@@ -11,7 +11,7 @@ export const productsReducers = (
         case EProductActions.GetProductsSuccess: {
             return {
                 ...state,
-                products: action.payload
+                products: {data: action.payload, limit: action.limit}
             };
         }
 

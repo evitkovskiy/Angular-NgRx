@@ -5,6 +5,7 @@ import { IAppState } from 'src/app/store/state/app.state';
 import { selectedUser } from 'src/app/store/selectors/user.selector';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -16,19 +17,12 @@ export class HeaderComponent implements AfterViewInit {
 
   constructor(
     private _store: Store<IAppState>,
-    private router: Router,
-    private cdRef: ChangeDetectorRef
+    private router: Router
   ) { }
 
   ngAfterViewInit() {
-    //Временный костыль
-    setTimeout(() => this.user$ = this._store.pipe(select(selectedUser)), 500);
-    this.cdRef.markForCheck();
+    this.user$ = this._store.pipe(delay(0), select(selectedUser));
   }
-
-  // get user$() {
-  //   return this._store.pipe(select(selectedUser));
-  // } 
 
   logout() {
     localStorage.removeItem('token');

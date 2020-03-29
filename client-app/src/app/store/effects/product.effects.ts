@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, map, withLatestFrom } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 import { IAppState } from '../state/app.state';
 import {
     GetProduct, GetProductSuccess, GetProducts, GetProductsSuccess, EProductActions
 } from '../actions/products.action'
 import { AuthService } from '../../core/services/auth.service';
+import { ProductsService } from '../../core/services/products.service'
 import { IProduct } from '../state/products.state';
 import { selectedProductList } from '../selectors/product.selector'
 
@@ -18,26 +19,26 @@ export class ProductEffects {
     getProduct$ = this.action$.pipe(
         ofType<GetProduct>(EProductActions.GetProduct),
         map(action => action.payload),
-        withLatestFrom(this.authService.getShops()),
-        map(([id, products]) => {
-            const selectedProduct = products.filter(user => user._id.$oid === id)[0];
-            return new GetProductSuccess(selectedProduct)
-        })
+        switchMap((idProduct) => this.productsService.getProduct(idProduct)),
+        switchMap((productHttp: IProduct) => 
+        of(new GetProductSuccess(productHttp)))
     );
 
     @Effect()
     getProducts = this.action$.pipe(
         ofType<GetProducts>(EProductActions.GetProducts),
-        switchMap((data) => !data.payload ? this.authService.getShops()
-            : this.authService.filterData(data.payload)),
-        switchMap((productHttp: IProduct[]) => 
-        of(new GetProductsSuccess(productHttp)))
+        switchMap((data) => {
+            return this.productsService.getProducts(data.payload, data.params)
+        }),
+        switchMap((productHttp: {data: IProduct[], limit: number}) => 
+        of(new GetProductsSuccess(productHttp.data, productHttp.limit)))
     )
 
 
     constructor(
         private authService: AuthService,
         private action$: Actions,
-        private store: Store<IAppState>
+        private store: Store<IAppState>,
+        private productsService: ProductsService
     ) {}
 }

@@ -7,10 +7,9 @@ const app = express();
 app.use(cors());
 app.use(express.json({extended: true}))
 
-app.use('/static', express.static(`${__dirname}/static`));
 app.use(`/login`, require(`./routes/login.routes`));
 app.use(`/userdata`, require(`./routes/auth.routes`));
-app.use('/filter', require('./routes/filter.routes'))
+app.use('/getdata', require('./routes/getData.routes'))
 
 const PORT = config.get(`port`) || 5000;
 
